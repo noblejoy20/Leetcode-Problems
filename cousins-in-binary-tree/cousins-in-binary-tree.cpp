@@ -15,7 +15,7 @@ public:
         queue<pair<TreeNode*,int>> q; // node and its root value;
         q.push({root,-1});
         // keep variable to check if one value is found and the corresponding root of the value;
-        int isFound=0,previousNodeRoot=-1;
+        int previousNodeRoot=-1;
         
         // perform BFS
         while(!q.empty()){
@@ -28,12 +28,10 @@ public:
                     
                     // check if the node is of the given values.
                     if(front.first->val==x||front.first->val==y){
-                        // make it true the first time if we find x or y.
-                        // make it false the second time if we find x or y
-                        isFound=!isFound; 
                         
                         // if we have found the previousNode.
                         if(previousNodeRoot>0){
+                            // return true if root node value's are different else false.
                             return previousNodeRoot!=front.second;
                         }
                         
@@ -43,7 +41,8 @@ public:
                 }
                 
             }
-            if(isFound){
+            // if a node value is found in one level then there cannot be any cousin.
+            if(previousNodeRoot>0){
                 return false;
             }
         }
