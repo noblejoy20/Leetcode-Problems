@@ -1,18 +1,19 @@
 class Solution {
 public:
-    int maxProduct(vector<int>& arr) {
+    int maxProduct(vector<int>& nums) {
         int prod=1;
         int mx=INT_MIN;
-        for(int i=0;i<arr.size();i++){
-            prod*=arr[i];
+        for(auto it:nums){
+            prod*=it;
             mx=max(mx,prod);
             if(prod==0){
                 prod=1;
             }
         }
+        //cout<<mx;
         prod=1;
-        for(int j=arr.size()-1;j>=0;j--){
-            prod*=arr[j];
+        for(int i=nums.size()-1;i>=0;i--){
+            prod*=nums[i];
             mx=max(mx,prod);
             if(prod==0){
                 prod=1;
