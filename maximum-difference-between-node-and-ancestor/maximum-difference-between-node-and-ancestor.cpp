@@ -9,17 +9,11 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+// Brute force approach O(N^2)
 class Solution {
 public:
      int ans=INT_MIN;
-//      void findMax(TreeNode* root,int& mx){
-//         if(!root){
-//             return;
-//         }
-        
-//         findMax(root->left,mx);
-//         findMax(root->right,mx);
-//     }
     void findMinMax(TreeNode* root,int& mn,int& mx){
         if(!root){
             return;
@@ -45,6 +39,29 @@ public:
     }
     int maxAncestorDiff(TreeNode* root) {
         solve(root);
+        return ans;
+    }
+};
+
+// Optimized Approach O(N)
+// Calculate min and max at each node recursively and update the ans at each point.
+
+class Solution {
+public:
+    int ans=INT_MIN;
+    void findMinMax(TreeNode* root,int mn,int mx){
+        if(!root){
+            return;
+        }
+        mn=min(root->val,mn);
+        mx=max(root->val,mx);
+        ans=max(ans,abs(mx-mn));
+        findMinMax(root->left,mn,mx);
+        findMinMax(root->right,mn,mx);
+    }
+    int maxAncestorDiff(TreeNode* root) {
+        int mn=INT_MAX,mx=INT_MIN;
+        findMinMax(root,mn,mx);
         return ans;
     }
 };
