@@ -28,3 +28,5 @@ coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167</pre>
 	<li><code>0 &lt;= nums[i] &lt;= 100</code></li>
 </ul>
 </div>
+
+![image](https://user-images.githubusercontent.com/21981449/147846660-a99b090a-8b82-4bcf-bdb2-3a4e7ac8e2ef.png)
