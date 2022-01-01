@@ -1,11 +1,14 @@
 class Solution {
 public:
-    unordered_map<string,int> mp;
+    //https://www.youtube.com/watch?v=YzvF8CqPafI&ab_channel=Pepcoding
     int maxCoins(vector<int>& nums) {
         int n = nums.size();
         int dp[n][n];
         
         memset(dp,0,sizeof(dp));
+        
+        // Think of last balloon to burst and take all the options out.
+        //General formula: dp[i,k-1]+dp[k+1,j]+nums[i-1]*nums[k]*nums[j+1];
         
         for(int g=0;g<n;g++){
            for(int i=0,j=g;j<n;i++,j++){
@@ -23,3 +26,4 @@ public:
         return dp[0][n-1];
     }
 };
+
