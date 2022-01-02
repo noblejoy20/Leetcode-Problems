@@ -11,17 +11,15 @@ public:
             }
         }
         int count=0;
-        unordered_map<int,int> keys;
+        int keys[1002];
+        memset(keys,0,sizeof(keys));
         for(auto it:time){
-            if(keys.size()>0){
-                for(int i=60;i<=mx+secmx;i+=60){
-                    if(i-it>0 && keys.count(i-it)){
-                        cout<<"hi";
-                        count+=keys[i-it];
-                    }
+            for(int i=60;i<=mx+secmx;i+=60){
+                if(i-it>0 && keys[i-it]>0){
+                    count+=keys[i-it];
                 }
-            }
-            keys[it]++;          
+            }  
+            keys[it]++;
         }
         return count;
         
