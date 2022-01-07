@@ -12,7 +12,7 @@ class Solution {
 public:
     vector<int> nums;
     Solution(ListNode* head) {
-        //srand(time(NULL));
+        srand(time(NULL));
         while(head!=NULL){
             nums.push_back(head->val);
             head=head->next;
@@ -20,14 +20,7 @@ public:
     }
     
     int getRandom() {
-        
-        int n=rand()%nums.size();
-        cout<<n<<" ";
-        // double d=n/RAND_MAX;
-        // //cout<<d<<" ";
-        // double val=d*(nums.size()-1);
-        // int result=(int)val;
-        return nums[n];
+        return nums[rand()%nums.size()];
     }
 };
 
