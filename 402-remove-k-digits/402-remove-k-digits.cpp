@@ -16,9 +16,9 @@ public:
             q.push_back(nums[i]);
         }
 
-        if(q.empty() || k> q.size()) return string(1,'0');
+       
         
-        while(k--){
+        while(!q.empty() && k--){
             q.pop_back();
         }       
         
