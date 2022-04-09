@@ -7,16 +7,20 @@ public:
         for(auto it:nums){
             mp[it]++;
         }
-        priority_queue<pp> pq;
-        
+        vector<vector<int>> v(10003,vector<int>{});
         for(auto it:mp){
-            pq.push({it.second,it.first});
+            v[it.second].push_back(it.first);
         }
-        
-        while(k--){
-            ans.push_back(pq.top().second);
-            pq.pop();
+        for(int i=v.size()-1;i>=0;i--){
+            if(v[i].size()>0){
+                for(auto it:v[i]){
+                    ans.push_back(it);
+                    k--;
+                    if(k==0) return ans;
+                }
+            }
+            
         }
-        return ans;
+        return {};
     }
 };
