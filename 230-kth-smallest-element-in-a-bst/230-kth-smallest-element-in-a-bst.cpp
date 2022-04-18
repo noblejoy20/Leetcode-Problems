@@ -15,10 +15,7 @@ public:
         if(!root) return -1;
         int left=kthSmallest(root->left,k);
         if(left>=0) return left;
-        k--;
-        if(k==0){
-            return root->val;
-        }
+        if(--k==0) return root->val;        
         int right=kthSmallest(root->right,k);
         if(right>=0) return right;
         return -1;
