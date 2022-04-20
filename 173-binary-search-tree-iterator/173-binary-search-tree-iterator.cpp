@@ -10,15 +10,21 @@
  * };
  */
 class BSTIterator {
-public:
-    vector<int> inorder;
-    int i=0;
+private:
+    int i;
+    TreeNode* curr;
+public:    
     BSTIterator(TreeNode* root) {
-        TreeNode* curr=root;
-        i=-1;
-        while(curr!=NULL){
+        curr=root;
+        i=-1;        
+    }
+    
+    int next() {    
+        int val=-1;
+        while(val==-1){
+            if(!curr) return 0;
             if(!curr->left){
-                inorder.push_back(curr->val);
+                val = curr->val;
                 curr=curr->right;
             }else{
                 TreeNode* prev=curr->left;
@@ -31,23 +37,18 @@ public:
                 }
                 if(prev->right==curr){
                     prev->right=NULL;
-                    inorder.push_back(curr->val);
+                    val = curr->val;
                     curr=curr->right;
                 }
             }
         }
-    }
-    
-    int next() {
-        
-        int val = inorder[i+1];
-        i++;
         return val;
+        
         
     }
     
     bool hasNext() {
-        return i+1<inorder.size();
+        return curr!=NULL;
     }
 };
 
