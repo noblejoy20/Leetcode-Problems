@@ -21,32 +21,32 @@ private:
     vector<LinkedList*> nodes;
 public:
     MyHashMap() {
-        nodes.resize(1000,NULL);
-    }
-    
-    void put(int key, int value) {
-        int pos = key % 1000;
-        if(nodes[pos] == NULL){
+        for(int i=0;i<1000;i++){
             LinkedList* head = new LinkedList(-1,-1);
             LinkedList* tail = new LinkedList(-1,-1);
             head->next=tail;
             tail->prev=head;
-            nodes[pos] = head;
-        }else{  
-            LinkedList* ptr=nodes[pos];
-            while(ptr->next!=NULL && ptr->next->key!=-1){
-                if(ptr->key == key){
-                    ptr->value = value;
-                    return;
-                }
-                ptr=ptr->next;
-            }
+            nodes.push_back(head);
+        }
+        //nodes.resize(1000,NULL);
+    }
+    
+    void put(int key, int value) {
+        int pos = key % 1000;
+  
+        LinkedList* ptr=nodes[pos];
+        while(ptr->next!=NULL && ptr->next->key!=-1){
             if(ptr->key == key){
                 ptr->value = value;
                 return;
-            }            
+            }
+            ptr=ptr->next;
         }
-        LinkedList* ptr=nodes[pos];
+        if(ptr->key == key){
+            ptr->value = value;
+            return;
+        }            
+
         LinkedList* temp = new LinkedList(key,value);
         temp->next=ptr->next;
         ptr->next=temp;
@@ -57,35 +57,31 @@ public:
     
     int get(int key) {
         int pos = key % 1000;
-        if(nodes[pos]!=NULL){
-            LinkedList* ptr = nodes[pos];
-            while(ptr->next!=NULL){
-                if(ptr->key==key){ return ptr->value;}
-                ptr=ptr->next;
-            }
+        LinkedList* ptr = nodes[pos];
+        while(ptr->next!=NULL){
             if(ptr->key==key){ return ptr->value;}
+            ptr=ptr->next;
         }
+        if(ptr->key==key){ return ptr->value;}
         return -1;
     }
     
     void remove(int key) {
         int pos = key % 1000;
-        if(nodes[pos]!=NULL){
-            LinkedList* ptr = nodes[pos];
-            while(ptr->next!=NULL){        
-                if(ptr->key==key){    
-                    ptr->prev->next=ptr->next;
-                    ptr->next->prev=ptr->prev;
-                    return;
-                }
-                ptr=ptr->next;
-            }
+        LinkedList* ptr = nodes[pos];
+        while(ptr->next!=NULL){        
             if(ptr->key==key){    
                 ptr->prev->next=ptr->next;
                 ptr->next->prev=ptr->prev;
                 return;
             }
+            ptr=ptr->next;
         }
+        if(ptr->key==key){    
+            ptr->prev->next=ptr->next;
+            ptr->next->prev=ptr->prev;
+            return;
+        }  
     }
 };
 
